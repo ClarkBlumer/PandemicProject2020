@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = false;
 
     private Rigidbody2D rb;
+    private SpriteRenderer Sprite;
     private float movementX;
     private float movementY;
 
@@ -18,11 +19,20 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
         Jump();
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Sprite.flipX = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            Sprite.flipX = false;
+        }
     }
 
     // Update is called once per frame
@@ -30,9 +40,9 @@ public class PlayerController : MonoBehaviour
     {
         //Jump();
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+        
         transform.position += movement * Time.deltaTime * Speed;
-        
-        
+                
     }
 
     void Jump()
